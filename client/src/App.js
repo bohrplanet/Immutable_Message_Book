@@ -4,8 +4,6 @@ import getWeb3 from "./getWeb3";
 import Add from "./components/Add"
 import List from "./components/List"
 
-
-
 import "./App.css";
 
 class App extends Component {

@@ -1,3 +1,4 @@
-li {
-    list-style: none;
+.content {
+    text-align: left;
+    text-indent: 1em;
 }

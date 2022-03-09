@@ -1,18 +1,22 @@
 import React, { Component } from "react";
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 import './index.css'
 
-interface IProps {
-    addPrediction : Function
-}
+// interface IProps {
+//     addPrediction : Function
+// }
 
-interface IState {
+// interface IState {
 
-}
+// }
 
-export default class Add extends Component<IProps, IState> {
+const { TextArea } = Input;
 
-    inputRef = React.createRef<HTMLTextAreaElement>();
+// export default class Add extends Component<IProps, IState> {
+export default class Add extends Component {
+
+    // inputRef = React.createRef<HTMLTextAreaElement>();
+    inputRef = React.createRef();
 
     sendToApp = () => {
         // const {inputRef} = this;
@@ -24,7 +28,9 @@ export default class Add extends Component<IProps, IState> {
     render() {
         return (
             <div className="todo-header">
-                <textarea id="content" ref={this.inputRef} cols={50} rows={7}/>
+                <TextArea id="content" ref={this.inputRef} cols={50} rows={7} />
+                {/* <textarea id="content" ref={this.inputRef} cols={50} rows={7}/> */}
+                <br />
                 <br />
                 {/* <button onClick={this.sendToApp}>Post My Prediction</button> */}
                 <Button type="primary" onClick={this.sendToApp}>Post My Prediction</Button>
