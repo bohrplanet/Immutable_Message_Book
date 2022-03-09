@@ -7,11 +7,15 @@ interface IProps {
     id: string,
     content: string,
     owner: string,
-    timestamp: string
+    timestamp: number
 }
 
 export default class Item extends Component<IProps, any> {
+
+    
+
     render() {
+
         // const {id: string, content, owner, timestamp} = this.props;
         return (
             // <li>
@@ -21,15 +25,15 @@ export default class Item extends Component<IProps, any> {
             // </li>
 
             <Comment
-                author= {this.props.owner}
+                author={this.props.owner}
                 content={
                     <p className="content">
                         {this.props.content}
                     </p>
                 }
                 datetime={
-                    <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-                        <span>{moment().fromNow()}</span>
+                    <Tooltip title={moment.unix(this.props.timestamp).format('YYYY-MM-DD HH:mm:ss')}>
+                        <span>{moment.unix(this.props.timestamp).format('YYYY-MM-DD HH:mm:ss')}</span>
                     </Tooltip>
                 }
             />

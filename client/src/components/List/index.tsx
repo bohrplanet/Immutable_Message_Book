@@ -23,7 +23,7 @@ interface prediction {
     id: string,
     content: string,
     owner: string,
-    timestamp: string
+    timestamp: number
 }
 
 interface IProps {
