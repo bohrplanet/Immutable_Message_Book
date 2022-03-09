@@ -1,22 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
+  width: 960px;
+  margin: 0 auto;
+
 }
 
-.App-logo {
-  height: 40vmin;
+.Head {
+  font-size: 80px;
+  margin: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+.Info {
+  text-align: left;
+  font-size: 18px;
+  text-indent: 2em;
 }
