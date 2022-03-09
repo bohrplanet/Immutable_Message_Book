@@ -3,6 +3,7 @@ import Impmb from "./contracts/Impmb.json";
 import getWeb3 from "./getWeb3";
 import Add from "./components/Add"
 import List from "./components/List"
+import { Divider} from 'antd';
 
 import "./App.css";
 
@@ -162,12 +163,10 @@ class App extends Component {
         </p>
         <div>The stored value is: </div> */}
 
-        <h1 className="Head">Immutable Message Book</h1>
+        <h1 className="Head">Blockchain Message Book</h1>
 
-        <p className="Info">This is a blockchain-based message book. The feature of this message book is that once a message is posted on the blockchain,
-          it cannot be deleted or changed. I will apply this guestbook to my predictions about the digital currency market. Through this guestbook,
-          I can certify that my predictions have not been deleted, or changed.</p>
-
+        <p className="Info">Make your prediction Immutable</p>
+        <Divider />
         <List todos={this.state.predictions} />
         <Add addPrediction={this.addPrediction} />
 

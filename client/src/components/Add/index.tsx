@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Button, Input } from 'antd';
+import React, { Component, TextareaHTMLAttributes } from "react";
+import { Divider, Button, Input } from 'antd';
 import './index.css'
 
 interface IProps {
@@ -29,12 +29,13 @@ export default class Add extends Component<IProps, IState> {
     render() {
         return (
             <div className="todo-header">
-                <TextArea id="content" ref={this.inputRef} cols={50} rows={7} />
+                <Divider />
+                {/* <p className="word">write a message</p> */}
+                <TextArea id="content" ref={this.inputRef} cols={10} rows={8} placeholder="Type your prediction"/>
                 {/* <textarea id="content" ref={this.inputRef} onChange={change2} cols={50} rows={7}/> */}
                 <br />
-                <br />
                 {/* <button onClick={this.sendToApp}>Post My Prediction</button> */}
-                <Button type="primary" onClick={this.sendToApp}>Post My Prediction</Button>
+                <Button className="button" type="primary" size="large" onClick={this.sendToApp}>Post Prediction</Button>
             </div>
         )
     }

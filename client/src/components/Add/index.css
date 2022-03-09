@@ -2,3 +2,12 @@
 .title {
     background-color: red;
 }
+
+.button {
+    margin-top: 25px;
+    float: right;
+}
+
+.word {
+    text-align: left;
+}

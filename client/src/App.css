@@ -7,16 +7,19 @@
   text-align: center;
   width: 960px;
   margin: 0 auto;
+  color: #1890ff;
 
 }
 
 .Head {
   font-size: 80px;
   margin: 0;
+  color: #1890ff;
 }
 
 .Info {
-  text-align: left;
-  font-size: 18px;
-  text-indent: 2em;
+  text-align: right;
+  font-size: 24px;
+  margin-top: 20px;
+  margin-right: 30px;
 }
