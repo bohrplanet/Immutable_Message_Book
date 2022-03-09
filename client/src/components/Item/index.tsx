@@ -10,9 +10,20 @@ interface IProps {
     timestamp: number
 }
 
-export default class Item extends Component<IProps, any> {
+interface IState {
+    mouseIsEnter : boolean
+}
 
-    
+export default class Item extends Component<IProps, IState> {
+
+
+    handleEnter = () => {
+        this.setState({mouseIsEnter:true})
+    }
+
+    handleLeave = () => {
+        this.setState({mouseIsEnter:false})
+    }
 
     render() {
 
@@ -24,7 +35,8 @@ export default class Item extends Component<IProps, any> {
             //     </label>
             // </li>
 
-            <Comment
+            <li className="li" onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave}>
+            <Comment className="comment"
                 author={this.props.owner}
                 content={
                     <p className="content">
@@ -37,6 +49,7 @@ export default class Item extends Component<IProps, any> {
                     </Tooltip>
                 }
             />
+            </li>
         )
     }
 }

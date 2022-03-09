@@ -24,6 +24,9 @@ export default class Add extends Component<IProps, IState> {
         // console.log("input value is ", this.inputRef.current?.resizableTextArea.textArea.value);
         // console.log("input value is ", this.inputRef.current?.value);
         this.props.addPrediction(this.inputRef.current?.resizableTextArea.textArea.value);
+
+        // TODO 如果输入为空，则禁止输入
+        // TODO 上传消息后，输入栏清空
     }
 
     render() {
