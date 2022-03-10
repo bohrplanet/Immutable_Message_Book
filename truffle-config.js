@@ -1,6 +1,6 @@
 const path = require("path");
 
-const HDWalletProvider = require('truffle-hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 // save private key at local, use secrets json to access.
 const mnemonic = require("./secrets.json").mnemonic
@@ -11,9 +11,9 @@ module.exports = {
   // to customize your Truffle configuration!
   contracts_build_directory: path.join(__dirname, "client/src/contracts"),
   networks: {
-    // develop: {
-    //   port: 8545
-    // },
+    develop: {
+      port: 8545
+    },
 
     ropsten: {
       provider: () => new HDWalletProvider(mnemonic, `https://speedy-nodes-nyc.moralis.io/c908d6e4fc7cc3c0f8b58460/eth/ropsten`),
