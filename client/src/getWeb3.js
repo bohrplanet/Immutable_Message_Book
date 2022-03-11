@@ -6,16 +6,26 @@ const getWeb3 = () =>
     window.addEventListener("load", async () => {
       // Modern dapp browsers...
       if (window.ethereum) {
-        console.log("modern dapp browsers");
-        const web3 = new Web3(window.ethereum);
-        try {
-          // Request account access if needed
-          await window.ethereum.enable();
-          // Accounts now exposed
-          resolve(web3);
-        } catch (error) {
-          reject(error);
+        console.log("modern dapp browsers id", window.ethereum.chainId);
+
+        if (window.ethereum.chainId !== "0x3") {
+          console.log("aaa");
+          resolve(null);
         }
+        else {
+          const web3 = new Web3(window.ethereum);
+          try {
+
+            console.log("id is ", web3.eth.net.getId());
+            // Request account access if needed
+            await window.ethereum.enable();
+            // Accounts now exposed
+            resolve(web3);
+          } catch (error) {
+            reject(error);
+          }
+        }
+
       }
       // Legacy dapp browsers...
       else if (window.web3) {
@@ -26,13 +36,13 @@ const getWeb3 = () =>
       }
       // Fallback to localhost; use dev console port by default...
       else {
-        const provider = new Web3.providers.HttpProvider(
-          "http://127.0.0.1:8545"
-        );
-        const web3 = new Web3(provider);
-        console.log("web3 is ", web3);
-        console.log("No web3 instance injected, using Local web3.");
-        resolve(web3);
+        // const provider = new Web3.providers.HttpProvider(
+        //   "http://127.0.0.1:8545"
+        // );
+        // const web3 = new Web3(provider);
+        // console.log("web3 is ", web3);
+        // console.log("No web3 instance injected, using Local web3.");
+        resolve(null);
       }
     });
   });

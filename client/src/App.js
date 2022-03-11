@@ -17,36 +17,49 @@ class App extends Component {
     result: null,
     predictions: [],
     isModalVisible: false,
-    setIsModalVisible: false
+    setIsModalVisible: false,
+    setIsModalVisible_network: false
   };
 
   componentWillMount = async () => {
+    const web3 = await getWeb3();
+    console.log("getweb3", web3);
+    this.setState({web3});
     if (!window.ethereum) {
       this.setState({ setIsModalVisible: true });
+    } else if (!web3) {
+      this.setState({ setIsModalVisible_network: true });
     }
   }
 
   componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
-      const web3 = await getWeb3();
+      const web3 = this.state.web3;
 
-      // Use web3 to get the user's accounts.
-      const accounts = await web3.eth.getAccounts();
+      if (web3) {
+        // Use web3 to get the user's accounts.
+        const accounts = await web3.eth.getAccounts();
 
-      // Get the contract instance.
-      const networkId = await web3.eth.net.getId();
-      const deployedNetwork = Impmb.networks[networkId];
-      const instance = new web3.eth.Contract(
-        Impmb.abi,
-        deployedNetwork && deployedNetwork.address,
-      );
+        // Get the contract instance.
+        const networkId = await web3.eth.net.getId();
+        const deployedNetwork = Impmb.networks[networkId];
+        const instance = new web3.eth.Contract(
+          Impmb.abi,
+          deployedNetwork && deployedNetwork.address,
+        );
 
-      console.log("instance is", instance);
+        console.log("accounts is", accounts);
+        console.log("networkId is", networkId);
+        console.log("deployedNetwork is", deployedNetwork);
+        console.log("instance is ", instance);
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.getTopic);
+        // Set web3, accounts, and contract to the state, and then proceed with an
+        // example of interacting with the contract's methods.
+        this.setState({ web3, accounts, contract: instance }, this.getTopic);
+      }
+
+
     } catch (error) {
       // Catch any errors for any of the above operations.
       // alert(
@@ -163,6 +176,14 @@ class App extends Component {
     this.setState({ setIsModalVisible: false });
   };
 
+  handleOk_network = () => {
+    this.setState({ setIsModalVisible_network: false });
+  };
+
+  handleCancel_network = () => {
+    this.setState({ setIsModalVisible_network: false });
+  };
+
 
   render() {
 
@@ -170,7 +191,11 @@ class App extends Component {
       <div className="App">
         <Modal title={<span style={{ fontSize: '18px', color: '#1890ff' }}> Connect to a wallet</span>} style={{ top: 300 }} visible={this.state.setIsModalVisible} onOk={this.handleOk} okText="Open MetaMask" onCancel={this.handleCancel}>
           <p style={{ fontSize: '16px', color: '#1890ff' }}>You'll need to install <b>MetaMask</b> to continue. Once you installed it, refresh the page please.</p>
-        </Modal>;
+        </Modal>
+
+        <Modal title={<span style={{ fontSize: '18px', color: '#1890ff' }}> Connect wallet to Ropsten Network</span>} footer={null} style={{ top: 400 }} maskClosable={false} closable={false} visible={this.state.setIsModalVisible_network} >
+          <p style={{ fontSize: '16px', color: '#1890ff' }}>You'll need to change network to Ropsten Test Network.</p>
+        </Modal>
 
         {/* <h1>Good to Go!</h1>
         <p>Your Truffle Box is installed and ready.</p>
@@ -186,7 +211,7 @@ class App extends Component {
 
         <h1 className="Head">Blockchain Message Book</h1>
 
-        <p className="Info">Make your prediction Immutable</p>
+        <p className="Info">make your prediction Immutable</p>
         <Divider />
         <List todos={this.state.predictions} />
         <Add addPrediction={this.addPrediction} />
