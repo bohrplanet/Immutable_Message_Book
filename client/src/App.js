@@ -3,7 +3,7 @@ import Impmb from "./contracts/Impmb.json";
 import getWeb3 from "./getWeb3";
 import Add from "./components/Add"
 import List from "./components/List"
-import { Divider, Modal, message } from 'antd';
+import { Divider, Modal, message, notification } from 'antd';
 
 import "./App.css";
 
@@ -135,8 +135,28 @@ class App extends Component {
     //   return;
     // }
 
+    let reject_flag = false;
+
     // 调用合约的方法
-    await contract.methods.postPrediction("test", value).send({ from: accounts[0], gas: 1000000 });
+    await contract.methods.postPrediction("test", value).send({ from: accounts[0], gas: 1000000 }).then(res => {
+      console.log("res", res);
+    }).catch(error => {
+      console.log("error", error);
+      if (error.code == 4001) {
+        console.log("d");
+        reject_flag = true;
+        return message.warning('Rejected to send message!');
+      }
+    });
+
+    // use notification when massage deployed on the blockchain
+    if (!reject_flag) {
+      notification.success({
+        message: `Success!`,
+        description:
+          'Message is on the Blockchain Now!'
+      });
+    }
 
     // 将输入框清空
     // document.getElementById("title").value = "";
