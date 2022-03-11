@@ -81,12 +81,11 @@ class App extends Component {
 
     let result = [];
 
-    let i = 0;
-    for (i = 0; i < count; i++) {
+    // let i = 0;
+    for (let i = 0; i < count; i++) {
       // 获得合约对象的属性
       // 由于这是一个异步任务，所以需要添加
       await contract.methods.topics(i).call().then(function (topic) {
-        const title = topic[0];
         const content = topic[1];
         const owner = topic[2];
         const timestamp = topic[3];
@@ -152,7 +151,7 @@ class App extends Component {
 
     }).catch(error => {
       console.log("error", error);
-      if (error.code == 4001) {
+      if (error.code === 4001) {
         console.log("d");
         reject_flag = true;
         return message.warning('Rejected to send message!');
@@ -173,7 +172,7 @@ class App extends Component {
     // if account is empty, then don't post.
     console.log("accounts is ", this.state.accounts.length);
 
-    if (this.state.accounts.length != 0) {
+    if (this.state.accounts.length !== 0) {
       this.postTopic(prediction_value);
     } else {
       return message.info('Connect wallet to send message.');

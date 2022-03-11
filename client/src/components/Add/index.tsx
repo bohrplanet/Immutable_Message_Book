@@ -1,4 +1,4 @@
-import React, { Component, TextareaHTMLAttributes } from "react";
+import React, { Component } from "react";
 import { Divider, Button, Input, message } from 'antd';
 import './index.css'
 
@@ -22,7 +22,7 @@ export default class Add extends Component<IProps, IState> {
     inputRef = React.createRef<any>();
     // inputRef = React.createRef(null);
 
-    componentWillMount = async () => {
+    UNSAFE_componentWillMount = async () => {
         this.setState({ area: window.localStorage.value });
         window.localStorage.setItem("value", "");
 
@@ -51,12 +51,12 @@ export default class Add extends Component<IProps, IState> {
 
 
         // TODO 如果输入为空，则禁止输入
-        if (this.inputRef.current?.resizableTextArea.textArea.value == "") {
+        if (this.inputRef.current?.resizableTextArea.textArea.value === "") {
             return message.info('Message content is empty.');
         }
 
 
-        if (this.props.accounts == null || this.props.accounts.length == 0) {
+        if (this.props.accounts === null || this.props.accounts.length === 0) {
             return message.info('Connect wallet to send message.');
         }
 

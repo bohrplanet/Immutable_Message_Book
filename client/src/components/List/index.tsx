@@ -1,4 +1,4 @@
-import React, { Component, useLayoutEffect } from "react";
+import React from "react";
 import Item from "../Item"
 import './index.css'
 
