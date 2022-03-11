@@ -156,13 +156,10 @@ class App extends Component {
         description:
           'Message is on the Blockchain Now!'
       });
+
+      this.getTopic()
+
     }
-
-    // 将输入框清空
-    // document.getElementById("title").value = "";
-    // document.getElementById("content").value = ""
-
-    this.getTopic()
 
   };
 
@@ -242,8 +239,11 @@ class App extends Component {
         <p className="Info">make your prediction Immutable</p>
         <Divider />
         <List todos={this.state.predictions} />
-        <Add addPrediction={this.addPrediction} accounts={this.state.accounts} chainId={this.state.chainId}/>
-
+        <Add addPrediction={this.addPrediction} accounts={this.state.accounts} chainId={this.state.chainId} />
+        <br />
+        <Divider className="footer" />
+        <p className="footer_info">Made with Love by Bohr @2022 email: crypto18mo@gmail.com</p>
+        <br />
       </div>
     );
   }
