@@ -7,7 +7,7 @@ interface IProps {
 }
 
 interface IState {
-
+    area: string
 }
 
 const { TextArea } = Input;
@@ -18,12 +18,18 @@ export default class Add extends Component<IProps, IState> {
     inputRef = React.createRef<any>();
     // inputRef = React.createRef(null);
 
+    componentWillMount = async () => {
+        this.setState({area: ""});
+    }
+
     sendToApp = () => {
 
         // TODO 如果输入为空，则禁止输入
         if (this.inputRef.current?.resizableTextArea.textArea.value == "") {
             return message.info('Message content is empty.');
         }
+
+
         // const {inputRef} = this;
         // 将textarea中的内容传给APP处理
         // console.log("input value is ", this.inputRef.current?.resizableTextArea.textArea.value);
@@ -31,7 +37,8 @@ export default class Add extends Component<IProps, IState> {
         this.props.addPrediction(this.inputRef.current?.resizableTextArea.textArea.value);
 
         // TODO 上传消息后，输入栏清空
-        this.inputRef.current!.resizableTextArea.value = ""
+        this.setState({area: ""});
+
     }
 
     render() {
@@ -39,7 +46,7 @@ export default class Add extends Component<IProps, IState> {
             <div className="todo-header">
                 <Divider />
                 {/* <p className="word">write a message</p> */}
-                <TextArea id="content" ref={this.inputRef} cols={10} rows={8} placeholder="Type your prediction" />
+                <TextArea id="content" value={this.state.area} ref={this.inputRef} onChange={((e) => this.setState({area: e.target.value}))} cols={10} rows={8} placeholder="Type your prediction" />
                 {/* <textarea id="content" ref={this.inputRef} onChange={change2} cols={50} rows={7}/> */}
                 <br />
                 {/* <button onClick={this.sendToApp}>Post My Prediction</button> */}
