@@ -6,6 +6,7 @@ const getWeb3 = () =>
     window.addEventListener("load", async () => {
       // Modern dapp browsers...
       if (window.ethereum) {
+        console.log("modern dapp browsers");
         const web3 = new Web3(window.ethereum);
         try {
           // Request account access if needed
@@ -29,6 +30,7 @@ const getWeb3 = () =>
           "http://127.0.0.1:8545"
         );
         const web3 = new Web3(provider);
+        console.log("web3 is ", web3);
         console.log("No web3 instance injected, using Local web3.");
         resolve(web3);
       }

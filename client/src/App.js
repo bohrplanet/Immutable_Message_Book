@@ -3,7 +3,7 @@ import Impmb from "./contracts/Impmb.json";
 import getWeb3 from "./getWeb3";
 import Add from "./components/Add"
 import List from "./components/List"
-import { Divider} from 'antd';
+import { Divider, Modal } from 'antd';
 
 import "./App.css";
 
@@ -15,8 +15,16 @@ class App extends Component {
     accounts: null,
     contract: null,
     result: null,
-    predictions: []
+    predictions: [],
+    isModalVisible: false,
+    setIsModalVisible: false
   };
+
+  componentWillMount = async () => {
+    if (!window.ethereum) {
+      this.setState({ setIsModalVisible: true });
+    }
+  }
 
   componentDidMount = async () => {
     try {
@@ -34,14 +42,16 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
+      console.log("instance is", instance);
+
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance }, this.getTopic);
     } catch (error) {
       // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
-      );
+      // alert(
+      //   `Failed to load web3, accounts, or contract. Check console for details.`,
+      // );
       console.error(error);
     }
   };
@@ -144,12 +154,23 @@ class App extends Component {
   //   this.setState({ storageValue: response });
   // };
 
+  handleOk = () => {
+    // this.setState({ setIsModalVisible: false });
+    window.open("https://metamask.io/");
+  };
+
+  handleCancel = () => {
+    this.setState({ setIsModalVisible: false });
+  };
+
+
   render() {
-    if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
-    }
+
     return (
       <div className="App">
+        <Modal title={<span style={{ fontSize: '18px', color: '#1890ff' }}> Connect to a wallet</span>} style={{ top: 300 }} visible={this.state.setIsModalVisible} onOk={this.handleOk} okText="Open MetaMask" onCancel={this.handleCancel}>
+          <p style={{ fontSize: '16px', color: '#1890ff' }}>You'll need to install <b>MetaMask</b> to continue. Once you installed it, refresh the page please.</p>
+        </Modal>;
 
         {/* <h1>Good to Go!</h1>
         <p>Your Truffle Box is installed and ready.</p>
