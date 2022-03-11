@@ -221,7 +221,7 @@ class App extends Component {
         <p className="Info">make your prediction Immutable</p>
         <Divider />
         <List todos={this.state.predictions} />
-        <Add addPrediction={this.addPrediction} />
+        <Add addPrediction={this.addPrediction} accounts={this.state.accounts}/>
 
       </div>
     );

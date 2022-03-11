@@ -4,6 +4,7 @@ import './index.css'
 
 interface IProps {
     addPrediction: Function
+    accounts: string[]
 }
 
 interface IState {
@@ -21,6 +22,7 @@ export default class Add extends Component<IProps, IState> {
     componentWillMount = async () => {
         this.setState({area: ""});
     }
+    
 
     sendToApp = () => {
 
@@ -29,6 +31,9 @@ export default class Add extends Component<IProps, IState> {
             return message.info('Message content is empty.');
         }
 
+        if (this.props.accounts.length == 0) {
+            return message.info('Connect wallet to send message.');
+        }
 
         // const {inputRef} = this;
         // 将textarea中的内容传给APP处理

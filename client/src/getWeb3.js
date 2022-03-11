@@ -18,10 +18,7 @@ const getWeb3 = () =>
             // We recommend reloading the page unless you have good reason not to.
             console.log("listen!");
 
-            // reload page when accounts is not 0, that means user login.
-            if (accounts.length != 0) {
-              window.location.reload();
-            }
+            window.location.reload();
 
           });
 
