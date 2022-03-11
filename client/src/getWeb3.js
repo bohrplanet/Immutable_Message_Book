@@ -12,15 +12,15 @@ const getWeb3 = () =>
         window.ethereum.request({ method: 'eth_chainId' }).then(res => {
           console.log("res is ", res);
 
-          window.ethereum.on('accountsChanged', (accounts) => {
-            // Handle the new chain.
-            // Correctly handling chain changes can be complicated.
-            // We recommend reloading the page unless you have good reason not to.
-            console.log("listen!");
+          // window.ethereum.on('accountsChanged', (accounts) => {
+          //   // Handle the new chain.
+          //   // Correctly handling chain changes can be complicated.
+          //   // We recommend reloading the page unless you have good reason not to.
+          //   console.log("listen!");
 
-            window.location.reload();
+          //   window.location.reload();
 
-          });
+          // });
 
           window.ethereum.on('chainChanged', (chainId) => {
             // Handle the new chain.
@@ -29,25 +29,25 @@ const getWeb3 = () =>
             window.location.reload();
           });
 
-          if (window.ethereum.chainId !== "0x3") {
-            console.log("aaa");
-            resolve(null);
-          }
-          else {
-            const web3 = new Web3(window.ethereum);
-            try {
-
-              console.log("id is ", web3.eth.net.getId());
-              // Request account access if needed
-              window.ethereum.request({ method: 'eth_requestAccounts' });
-              // Accounts now exposed
-              resolve(web3);
-            } catch (error) {
-              reject(error);
+            if (window.ethereum.chainId !== "0x3") {
+              console.log("aaa");
+              resolve(null);
             }
-          }
-        })
-      }
+            else {
+              const web3 = new Web3(window.ethereum);
+              try {
+
+                console.log("id is ", web3.eth.net.getId());
+                // Request account access if needed
+                window.ethereum.request({ method: 'eth_requestAccounts' });
+                // Accounts now exposed
+                resolve(web3);
+              } catch (error) {
+                reject(error);
+              }
+            }
+          })
+        }
       // Legacy dapp browsers...
       else if (window.web3) {
         // Use Mist/MetaMask's provider.

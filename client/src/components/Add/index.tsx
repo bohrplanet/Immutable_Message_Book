@@ -14,6 +14,8 @@ interface IState {
 
 const { TextArea } = Input;
 
+declare const window: any;
+
 export default class Add extends Component<IProps, IState> {
     // export default class Add extends Component {
 
@@ -21,9 +23,24 @@ export default class Add extends Component<IProps, IState> {
     // inputRef = React.createRef(null);
 
     componentWillMount = async () => {
-        this.setState({area: ""});
+        this.setState({area: window.localStorage.value});
+        window.localStorage.setItem("value", "");
+
+        window.ethereum.on('accountsChanged', (accounts:any) => {
+            // Handle the new chain.
+            // Correctly handling chain changes can be complicated.
+            // We recommend reloading the page unless you have good reason not to.
+
+            let storage = window.localStorage;
+            storage.setItem("value", this.state.area);
+            window.location.reload();
+            // console.log("localstorage value is ", storage.value);
+            // console.log("this is ", this);
+            
+            // this.setState({area: storage.value});
+            // storage.setItem("value", "");
+          });
     }
-    
 
     sendToApp = () => {
 
