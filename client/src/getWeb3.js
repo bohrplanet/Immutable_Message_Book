@@ -17,7 +17,12 @@ const getWeb3 = () =>
             // Correctly handling chain changes can be complicated.
             // We recommend reloading the page unless you have good reason not to.
             console.log("listen!");
-            window.location.reload();
+
+            // reload page when accounts is not 0, that means user login.
+            if (accounts.length != 0) {
+              window.location.reload();
+            }
+
           });
 
           if (window.ethereum.chainId !== "0x3") {
