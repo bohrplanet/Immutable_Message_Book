@@ -5,6 +5,7 @@ import './index.css'
 interface IProps {
     addPrediction: Function
     accounts: string[]
+    chainId: number
 }
 
 interface IState {
@@ -26,13 +27,22 @@ export default class Add extends Component<IProps, IState> {
 
     sendToApp = () => {
 
+        console.log("sendToApp chainId", typeof this.props.chainId);
+        console.log("sendToApp chainId", this.props.chainId);
+        
+
         // TODO 如果输入为空，则禁止输入
         if (this.inputRef.current?.resizableTextArea.textArea.value == "") {
             return message.info('Message content is empty.');
         }
+        
 
-        if (this.props.accounts.length == 0) {
+        if (this.props.accounts == null || this.props.accounts.length == 0) {
             return message.info('Connect wallet to send message.');
+        }
+
+        if (this.props.chainId !== 3) {
+            return message.info('Change network to Ropsten Test Network.');
         }
 
         // const {inputRef} = this;

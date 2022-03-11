@@ -15,6 +15,7 @@ class App extends Component {
     accounts: null,
     contract: null,
     result: null,
+    chainId: null,
     predictions: [],
     isModalVisible: false,
     setIsModalVisible: false,
@@ -52,7 +53,7 @@ class App extends Component {
 
         // Set web3, accounts, and contract to the state, and then proceed with an
         // example of interacting with the contract's methods.
-        this.setState({ web3, accounts, contract: instance }, this.getTopic);
+        this.setState({ web3, accounts, contract: instance, chainId: networkId }, this.getTopic);
       }
 
 
@@ -221,7 +222,7 @@ class App extends Component {
         <p className="Info">make your prediction Immutable</p>
         <Divider />
         <List todos={this.state.predictions} />
-        <Add addPrediction={this.addPrediction} accounts={this.state.accounts}/>
+        <Add addPrediction={this.addPrediction} accounts={this.state.accounts} chainId={this.state.chainId}/>
 
       </div>
     );

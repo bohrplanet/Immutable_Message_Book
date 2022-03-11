@@ -22,6 +22,13 @@ const getWeb3 = () =>
 
           });
 
+          window.ethereum.on('chainChanged', (chainId) => {
+            // Handle the new chain.
+            // Correctly handling chain changes can be complicated.
+            // We recommend reloading the page unless you have good reason not to.
+            window.location.reload();
+          });
+
           if (window.ethereum.chainId !== "0x3") {
             console.log("aaa");
             resolve(null);
