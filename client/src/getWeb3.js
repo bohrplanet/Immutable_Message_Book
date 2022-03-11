@@ -4,28 +4,40 @@ const getWeb3 = () =>
   new Promise((resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
     window.addEventListener("load", async () => {
+
       // Modern dapp browsers...
       if (window.ethereum) {
-        console.log("modern dapp browsers id", window.ethereum.chainId);
+        console.log("modern dapp browsers id", window.ethereum);
 
-        if (window.ethereum.chainId !== "0x3") {
-          console.log("aaa");
-          resolve(null);
-        }
-        else {
-          const web3 = new Web3(window.ethereum);
-          try {
+        window.ethereum.request({ method: 'eth_chainId' }).then(res => {
+          console.log("res is ", res);
 
-            console.log("id is ", web3.eth.net.getId());
-            // Request account access if needed
-            await window.ethereum.enable();
-            // Accounts now exposed
-            resolve(web3);
-          } catch (error) {
-            reject(error);
+          window.ethereum.on('accountsChanged', (accounts) => {
+            // Handle the new chain.
+            // Correctly handling chain changes can be complicated.
+            // We recommend reloading the page unless you have good reason not to.
+            console.log("listen!");
+            window.location.reload();
+          });
+
+          if (window.ethereum.chainId !== "0x3") {
+            console.log("aaa");
+            resolve(null);
           }
-        }
+          else {
+            const web3 = new Web3(window.ethereum);
+            try {
 
+              console.log("id is ", web3.eth.net.getId());
+              // Request account access if needed
+              window.ethereum.enable();
+              // Accounts now exposed
+              resolve(web3);
+            } catch (error) {
+              reject(error);
+            }
+          }
+        })
       }
       // Legacy dapp browsers...
       else if (window.web3) {

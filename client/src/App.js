@@ -3,7 +3,7 @@ import Impmb from "./contracts/Impmb.json";
 import getWeb3 from "./getWeb3";
 import Add from "./components/Add"
 import List from "./components/List"
-import { Divider, Modal } from 'antd';
+import { Divider, Modal, message } from 'antd';
 
 import "./App.css";
 
@@ -21,21 +21,17 @@ class App extends Component {
     setIsModalVisible_network: false
   };
 
-  componentWillMount = async () => {
-    const web3 = await getWeb3();
-    console.log("getweb3", web3);
-    this.setState({web3});
-    if (!window.ethereum) {
-      this.setState({ setIsModalVisible: true });
-    } else if (!web3) {
-      this.setState({ setIsModalVisible_network: true });
-    }
-  }
-
   componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
-      const web3 = this.state.web3;
+      const web3 = await getWeb3();
+      console.log("getweb3", web3);
+      this.setState({ web3 });
+      if (!window.ethereum) {
+        this.setState({ setIsModalVisible: true });
+      } else if (!web3) {
+        this.setState({ setIsModalVisible_network: true });
+      }
 
       if (web3) {
         // Use web3 to get the user's accounts.
@@ -124,6 +120,8 @@ class App extends Component {
 
     const { accounts, contract } = this.state;
 
+    console.log("postTopic accounts", accounts);
+
     console.log("postTopic value is ", value);
     // const title = document.getElementById("title").value;
     // const content = document.getElementById("content").value;
@@ -151,7 +149,16 @@ class App extends Component {
 
     console.log("prediction_value is ", prediction_value);
 
-    this.postTopic(prediction_value);
+    // if account is empty, then don't post.
+    console.log("accounts is ", this.state.accounts.length);
+
+    if (this.state.accounts.length != 0) {
+      this.postTopic(prediction_value);
+    } else {
+      return message.info('Connect wallet to send message.');
+    }
+
+
   }
 
   // runExample = async () => {
