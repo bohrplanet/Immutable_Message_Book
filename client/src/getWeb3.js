@@ -32,7 +32,7 @@ const getWeb3 = () =>
 
               console.log("id is ", web3.eth.net.getId());
               // Request account access if needed
-              window.ethereum.enable();
+              window.ethereum.request({ method: 'eth_requestAccounts' });
               // Accounts now exposed
               resolve(web3);
             } catch (error) {
