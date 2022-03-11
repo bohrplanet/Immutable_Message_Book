@@ -140,6 +140,16 @@ class App extends Component {
     // 调用合约的方法
     await contract.methods.postPrediction("test", value).send({ from: accounts[0], gas: 1000000 }).then(res => {
       console.log("res", res);
+      console.log("res status", res.status);
+      
+      if (res.status) {
+        notification.success({
+          message: `Success!`,
+          description:
+            'Message is on the Blockchain Now!'
+        });
+      }
+
     }).catch(error => {
       console.log("error", error);
       if (error.code == 4001) {
@@ -151,14 +161,7 @@ class App extends Component {
 
     // use notification when massage deployed on the blockchain
     if (!reject_flag) {
-      notification.success({
-        message: `Success!`,
-        description:
-          'Message is on the Blockchain Now!'
-      });
-
       this.getTopic()
-
     }
 
   };
@@ -242,7 +245,7 @@ class App extends Component {
         <Add addPrediction={this.addPrediction} accounts={this.state.accounts} chainId={this.state.chainId} />
         <br />
         <Divider className="footer" />
-        <p className="footer_info">Made with Love by Bohr @2022 email: crypto18mo@gmail.com</p>
+        <p className="footer_info">Made with ❤ by Bohr @2022 email: crypto18mo@gmail.com</p>
         <br />
       </div>
     );
