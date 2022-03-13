@@ -46,8 +46,8 @@ export default class Add extends Component<IProps, IState> {
 
     sendToApp = () => {
 
-        console.log("sendToApp chainId", typeof this.props.chainId);
-        console.log("sendToApp chainId", this.props.chainId);
+        // console.log("sendToApp chainId", typeof this.props.chainId);
+        // console.log("sendToApp chainId", this.props.chainId);
 
 
         // TODO 如果输入为空，则禁止输入
