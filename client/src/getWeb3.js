@@ -7,10 +7,10 @@ const getWeb3 = () =>
 
       // Modern dapp browsers...
       if (window.ethereum) {
-        console.log("modern dapp browsers id", window.ethereum);
+        // console.log("modern dapp browsers id", window.ethereum);
 
         window.ethereum.request({ method: 'eth_chainId' }).then(res => {
-          console.log("res is ", res);
+          // console.log("res is ", res);
 
           // window.ethereum.on('accountsChanged', (accounts) => {
           //   // Handle the new chain.
@@ -30,14 +30,14 @@ const getWeb3 = () =>
           });
 
             if (window.ethereum.chainId !== "0x3") {
-              console.log("aaa");
+              // console.log("aaa");
               resolve(null);
             }
             else {
               const web3 = new Web3(window.ethereum);
               try {
 
-                console.log("id is ", web3.eth.net.getId());
+                // console.log("id is ", web3.eth.net.getId());
                 // Request account access if needed
                 window.ethereum.request({ method: 'eth_requestAccounts' });
                 // Accounts now exposed
@@ -52,7 +52,7 @@ const getWeb3 = () =>
       else if (window.web3) {
         // Use Mist/MetaMask's provider.
         const web3 = window.web3;
-        console.log("Injected web3 detected.");
+        // console.log("Injected web3 detected.");
         resolve(web3);
       }
       // Fallback to localhost; use dev console port by default...

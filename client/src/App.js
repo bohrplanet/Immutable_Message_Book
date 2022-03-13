@@ -26,7 +26,7 @@ class App extends Component {
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
-      console.log("getweb3", web3);
+      // console.log("getweb3", web3);
       this.setState({ web3 });
       if (!window.ethereum) {
         this.setState({ setIsModalVisible: true });
@@ -46,10 +46,10 @@ class App extends Component {
           deployedNetwork && deployedNetwork.address,
         );
 
-        console.log("accounts is", accounts);
-        console.log("networkId is", networkId);
-        console.log("deployedNetwork is", deployedNetwork);
-        console.log("instance is ", instance);
+        // console.log("accounts is", accounts);
+        // console.log("networkId is", networkId);
+        // console.log("deployedNetwork is", deployedNetwork);
+        // console.log("instance is ", instance);
 
         // Set web3, accounts, and contract to the state, and then proceed with an
         // example of interacting with the contract's methods.
@@ -73,7 +73,7 @@ class App extends Component {
     // const { getCount } = contract.methods;
     const count = await contract.methods.getCount().call();
 
-    console.log("count is ", count);
+    // console.log("count is ", count);
 
     // this.setState({result: "ddd"});
 
@@ -107,7 +107,7 @@ class App extends Component {
       })
     }
 
-    console.log(" overall result is ", result);
+    // console.log(" overall result is ", result);
 
 
     this.setState({ predictions: result });
@@ -116,13 +116,13 @@ class App extends Component {
 
   postTopic = async (value) => {
 
-    console.log("postTopic");
+    // console.log("postTopic");
 
     const { accounts, contract } = this.state;
 
-    console.log("postTopic accounts", accounts);
+    // console.log("postTopic accounts", accounts);
 
-    console.log("postTopic value is ", value);
+    // console.log("postTopic value is ", value);
     // const title = document.getElementById("title").value;
     // const content = document.getElementById("content").value;
     // console.log("input1 is ", input1);
@@ -138,8 +138,8 @@ class App extends Component {
 
     // 调用合约的方法
     await contract.methods.postPrediction("test", value).send({ from: accounts[0], gas: 1000000 }).then(res => {
-      console.log("res", res);
-      console.log("res status", res.status);
+      // console.log("res", res);
+      // console.log("res status", res.status);
       
       if (res.status) {
         notification.success({
@@ -150,9 +150,9 @@ class App extends Component {
       }
 
     }).catch(error => {
-      console.log("error", error);
+      // console.log("error", error);
       if (error.code === 4001) {
-        console.log("d");
+        // console.log("d");
         reject_flag = true;
         return message.warning('Rejected to send message!');
       }
@@ -167,10 +167,10 @@ class App extends Component {
 
   addPrediction = async (prediction_value) => {
 
-    console.log("prediction_value is ", prediction_value);
+    // console.log("prediction_value is ", prediction_value);
 
     // if account is empty, then don't post.
-    console.log("accounts is ", this.state.accounts.length);
+    // console.log("accounts is ", this.state.accounts.length);
 
     if (this.state.accounts.length !== 0) {
       this.postTopic(prediction_value);
