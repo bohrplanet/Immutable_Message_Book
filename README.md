@@ -7,3 +7,4 @@ Through this guestbook, I can certify that my predictions have not been deleted,
 
 Todo List:
 1. display data from new to old.
+2. popup notification when send a transaction, use send("transactionHash", function()).
