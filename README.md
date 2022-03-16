@@ -7,5 +7,6 @@ Through this guestbook, I can certify that my predictions have not been deleted,
 
 Todo List:
 1. display data from new to old.
-2. popup notification when send a transaction, use send("transactionHash", function()). or
+2. popup notification when send a transaction, use on("transactionHash", function()). or
 we can use send({ from: accounts[0], gas: 1000000 }, function() {}).
+refer to http://cw.hubwiz.com/card/c/web3.js-1.0/1/4/9/
